@@ -1,0 +1,198 @@
+<div class="row" ng-controller="ctrlCurso">
+              
+          <div class="panel with panel-primary class">
+              <div class="panel-heading">
+                  <div class="row">
+                      <div class="col-lg-12">
+                          <h2 class="page-header">
+                            <span class="color-title-page">Curso</span>
+                          </h2>
+                      </div>
+                      <!-- /.col-lg-12 -->
+                  </div>
+              </div>
+
+              <div class="panel-body">                        
+
+                  <div class="panel panel-default">
+                        <div class="panel-heading">Cadastrar Curso</div>
+                        <div class="panel-body">
+
+                          <form name="painelAdmFormCurso" class="form-horizontal">
+                            <div class="form-group">
+                              <label class="control-label col-sm-2" for="">Nome</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" name="nome" placeholder="Nome" ng-model="curso.nome" ng-required="true">
+                                <div class="alert alert-danger" ng-show="painelAdmFormCurso.nome.$error.required && painelAdmFormCurso.nome.$dirty">
+                                  <strong>Obrigatório informar um nome ao curso</strong>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-sm-2" for="">Data e Horário</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" name="horario" placeholder="Data e Horário" ng-model="curso.horario" ng-required="true">
+                                <div class="alert alert-danger" ng-show="painelAdmFormCurso.horario.$error.required && painelAdmFormCurso.horario.$dirty">
+                                  <strong>Obrigatório informar um horário</strong>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-sm-2" for="">Número de Vagas</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" name="vagas" mask="999" placeholder="Número de Vagas" ng-model="curso.vagas" ng-required="true" maxlength="3">
+                                <div class="alert alert-danger" ng-show="painelAdmFormCurso.vagas.$error.required && painelAdmFormCurso.vagas.$dirty">
+                                  <strong>Obrigatório informar a quantidade de vagas</strong>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-sm-2" for="">Professor</label>
+                              <div class="col-sm-8">
+                                <select class="form-control" name="professor" ng-options="var.nome for var in arrayProfessor" ng-model="curso.professor" ng-required="true">
+                                  <option value="">Selecione o professor</option>
+                                </select>
+                                <div class="alert alert-danger" ng-show="painelAdmFormCurso.professor.$error.required && painelAdmFormCurso.professor.$dirty">
+                                  <strong>Obrigatório selecionar um professor</strong>
+                                </div>
+                              </div>
+                              
+                            </div>
+                            <div class="col-md-offset-2 col-md-8 col-md-offset-2">
+                                <button class="btn btn-success" ng-click="cadastrarCurso(curso)" ng-disabled="painelAdmFormCurso.$invalid">CADASTRAR</button>
+                                <button class="btn btn-warning" ng-click="limparCurso()">LIMPAR</button>
+                                <button class="btn btn-primary" ng-disabled="btnEditarUltimoCurso" ng-click="editarUltimoCurso()">EDITAR ULTIMO</button>
+                            </div>
+                            
+                          </form>            
+
+                        </div>
+                  </div>
+
+                  <div class="panel panel-default">
+                    <div class="panel-heading">Editar/Excluir Curso</div>
+                    <div class="panel-body">
+                      <form class="form-horizontal">
+                          <div class="form-group">
+                              <label class="control-label col-sm-2" for="">Buscar</label>
+                              <div class="col-sm-8">
+                                  <input type="text" class="form-control" name="" placeholder="Buscar" ng-model="busca.curso">
+                              </div>
+                           </div>
+                       </form>
+                      <table class="table table-striped">
+                          <tr>
+                              <th>Código</th>
+                              <th>Nome</th>
+                              <th>Data & Horário</th>
+                              <th>Vagas</th>
+                              <th>Conteúdo</th>
+                              <th>Professor</th>
+                              <th>Ação</th>
+                          </tr>
+                          <tr ng-repeat="var in arrayCurso | orderBy: 'nome' | filter:busca.curso">
+                              <td> {{var.id}} </td>
+                              <td> {{var.nome}} </td>
+                              <td> {{var.horario}} </td>
+                              <td> {{var.vagas}} </td>
+                              <td> {{var.conteudo}} </td>
+                              <td> {{var.professor}} </td>
+                              <td>
+                                <i ng-click="editarCurso(var)" data-toggle="modal" data-target="#myModalCurso" class="fa fa-pencil" aria-hidden="true"></i>
+                                <i ng-click="excluirCurso(var.id)" class="fa fa-trash" aria-hidden="true"></i>
+                              </td>
+                          </tr>
+                      </table>
+                       
+                    </div>
+                  </div>
+
+              </div>
+              <!-- /.body panel -->                    
+          </div> 
+          <!-- /.panel -->
+
+
+
+          <!-- /.MODAL -->
+          <div class="modal fade" id="myModalCurso" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Editar Curso</h4>
+                  </div>
+                  <div class="modal-body">
+                    
+                     <form name="painelAdmFormCursoModal" class="form-horizontal">
+                            <div class="form-group">
+                              <label class="control-label col-sm-2" for="">Código</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" placeholder="Código" ng-model="cursoModal.id" disabled>
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                              <label class="control-label col-sm-2" for="">Nome</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" name="nome" placeholder="Nome" ng-model="cursoModal.nome" ng-required="true">
+                                <div class="alert alert-danger" ng-show="painelAdmFormCursoModal.nome.$error.required && painelAdmFormCursoModal.nome.$dirty">
+                                  <strong>Obrigatório informar um nome</strong>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-sm-2" for="">Data e Horário</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" name="horario" placeholder="Data e Horário" ng-model="cursoModal.horario" ng-required="true">
+                                <div class="alert alert-danger" ng-show="painelAdmFormCursoModal.horario.$error.required && painelAdmFormCursoModal.horario.$dirty">
+                                  <strong>Obrigatório informar uma data e horário</strong>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-sm-2" for="">Número de Vagas</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" name="vagas" mask="999" placeholder="Número de Vagas" ng-model="cursoModal.vagas" ng-required="true" maxlength="3">
+                                <div class="alert alert-danger" ng-show="painelAdmFormCursoModal.vagas.$error.required && painelAdmFormCursoModal.vagas.$dirty">
+                                  <strong>Obrigatório informas a quantidade de vagas</strong>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-sm-2" for="">Conteúdo</label>
+                              <div class="col-sm-8">
+                                <textarea maxlength="400" class="form-control" name="conteudo" placeholder="Conteúdo" ng-model="cursoModal.conteudo"></textarea>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-sm-2" for="">Professor</label>
+                              <div class="col-sm-8">
+                                  <select class="form-control" name="professor" ng-options="var.nome for var in arrayProfessor" ng-model="cursoModal.professor" ng-required="true">
+                                      <option value="">Selecione o Professor</option>
+                                  </select>
+                                  <div class="alert alert-danger" ng-show="painelAdmFormCursoModal.professor.$error.required && painelAdmFormCursoModal.professor.$dirty">
+                                  <strong>Obrigatório selecionar um professor</strong>
+                                </div>
+                              </div>
+                              
+                            </div>
+                            
+                            <div class="form-group">                                 
+                              <div class="col-sm-offset-2 col-sm-8">
+                                <button data-dismiss="modal" class="btn btn-success" ng-click="salvarEdicaoCurso()" ng-disabled="painelAdmFormCursoModal.$invalid">EDITAR CADASTRO</button>
+                              </div>
+                            </div>
+                            
+                        </form>                       
+
+                  </div>
+                  <div class="modal-footer">
+                      
+                  </div>
+                </div>
+              </div>
+          </div>
+        
+      </div>
+      <!-- /.row -->

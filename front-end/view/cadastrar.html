@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="app">
+
+ <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Projeto Bairro da Juventude</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../biblioteca/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../biblioteca/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='../biblioteca/font/font-1.css' type='text/css'>
+    <link href='../biblioteca/font/font-2.css' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="../css/creative.css" rel="stylesheet">
+
+    <!-- Angular JavaScript -->
+    <script type="text/javascript" src="../biblioteca/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../biblioteca/angular/angular-route.min.js"></script>
+    <script type="text/javascript" src="../biblioteca/angular/ngMask.min.js"></script>
+
+    <!-- Angular JavaScript - app -->
+    <script type="text/javascript" src="../angular/app.js"></script>
+
+    <!-- Angular JavaScript - controller -->
+    <script type="text/javascript" src="../angular/controller/ctrlAluno.js"></script> 
+
+    <!-- Angular JavaScript - controller --> 
+    <script type="text/javascript" src="../angular/service/alunoAPI.js"></script>  
+    <script type="text/javascript" src="../angular/service/professorAPI.js"></script> 
+    <script type="text/javascript" src="../angular/service/cursoAPI.js"></script> 
+    <script type="text/javascript" src="../angular/service/statusAPI.js"></script> 
+
+  </head>
+
+  <body id="page-top" ng-controller="ctrlAluno">
+
+       <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand js-scroll-trigger cor-login" href="../index.html">
+            <a class="navbar-brand js-scroll-trigger" href="../index.html">
+              <img id="logo-tamanho" src="../img/logo-nav-main.png">
+            </a>
+          </a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+           
+
+              <li class="nav-item dropdown cursor-pointer">
+                <a class="nav-link dropdown-toggle cor-login" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Entrar
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="login/login-administracao.html">Administração</a>
+                    <a class="dropdown-item" href="login/login-professores.html">Professores</a>
+                    <a class="dropdown-item" href="login/login-alunos.html">Alunos</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+
+
+
+      <!-- formulário -->
+    <section class="container" >
+      <h1 class="col-lg-8 mx-auto text-center">CADASTRE-SE</h1>
+      <br>
+      <h3 class="col-lg-10 mx-auto text-center">São {{lengthCursos}} cursos a sua escolha que vão mudar a sua vida</h3>
+      <br><hr>
+
+      <div class="col-lg-8 mx-auto">  
+        
+          <form name="cadastrarForm" class="form-horizontal">
+            <div class="form-group">
+              <label class="control-label" for="">Email</label>
+              <div >
+                <input maxlength="200" type="email" class="form-control" name="email" placeholder="Email" ng-model="aluno.email" ng-required="true" required>
+              </div>
+              <div class="alert alert-danger" ng-show="cadastrarForm.email.$error.required && cadastrarForm.email.$dirty">
+                <strong>Obrigatório informar um email</strong> 
+              </div>  
+              <div class="alert alert-danger" ng-show="cadastrarForm.email.$error.email && cadastrarForm.email.$dirty">
+                <strong>Obrigatório informar um email válido</strong> 
+              </div>            
+            </div>
+
+            <div class="form-group">
+              <label class="control-label " for="">Senha</label>
+              <div >
+                <input maxlength="200" type="text" class="form-control" name="senha" placeholder="Senha" ng-model="aluno.senha" ng-required="true" required>
+              </div>
+              <div class="alert alert-danger" ng-show="cadastrarForm.senha.$error.required && cadastrarForm.senha.$dirty">
+                <strong>Obrigatório informar uma senha</strong>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label" for="">Nome Completo</label>
+              <div >
+                <input maxlength="200" type="text" class="form-control" name="nome" placeholder="Nome Completo" ng-model="aluno.nome" ng-required="true" required>
+              </div>
+              <div class="alert alert-danger" ng-show="cadastrarForm.nome.$error.required && cadastrarForm.nome.$dirty">
+                <strong>Obrigatório informar um nome</strong>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label" for="">Telefone</label>
+              <div >
+                <input maxlength="200" type="text" mask="(99) 99999-9999"  class="form-control" name="telefone" placeholder="Telefone" ng-model="aluno.telefone" ng-required="true" required>
+              </div>
+              <div class="alert alert-danger" ng-show="cadastrarForm.telefone.$error.required && cadastrarForm.telefone.$dirty">
+                <strong>Obrigatório informar o telefone</strong>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label " for="">Endereço</label>
+              <div >
+                <input maxlength="200" type="text" class="form-control" name="endereco" placeholder="Endereço" ng-model="aluno.endereco" ng-required="true" required>
+              </div>
+              <div class="alert alert-danger" ng-show="cadastrarForm.endereco.$error.required && cadastrarForm.endereco.$dirty">
+                <strong>Obrigatório informar um endereço</strong>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label" for="">Curso</label>
+              <div>
+                <select class="form-control" name="curso" ng-options="var.nome for var in arrayCurso" ng-model="aluno.curso" ng-required="true" required>
+                    <option value="">Selecione um Curso</option>                                         
+                </select>
+              </div>
+              <div class="alert alert-danger" ng-show="cadastrarForm.curso.$error.required && cadastrarForm.curso.$dirty">
+                <strong>Obrigatório escolher um curso</strong>
+              </div>
+            </div>
+
+            <br>
+            <div class="text-center">
+                <button class="btn btn-success" ng-click="cadastroAlunoHome(aluno)" ng-disabled="cadastrarForm.$invalid">CADASTRAR</button>
+            </div>
+          </form>    
+       
+      </div>
+    </section>
+
+
+ 
+    <!-- footer -->
+    <footer class="cor-laranja-theme color-white" >
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <h4 >Api desenvolvida utilizando todo o conhecimento repassado no curso de desenvolvimento web ministrado pela BETHA SISTEMAS</h4>
+           <hr class="primary hr-white">
+           <h2  class="section-heading">Contato</h2>
+           <br>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 ml-auto text-center color-white">
+            <i class="fa fa-phone fa-3x sr-contact"></i>
+            <p>(48) 998 060 375</p>
+          </div>
+          <div class="col-lg-4 ml-auto text-center">
+            <a class="color-white link-white"  href="../view/curriculo.html">
+              <i class="fa fa-address-card-o fa-3x sr-contact"></i>
+              <p>Currículo</p>
+            </a>
+          </div>
+          <div class="col-lg-4 mr-auto text-center">
+            <a class="color-white link-white" href="mailto:your-email@your-domain.com">
+              <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+              <p> guilhermerebelo@live.com</p>
+            </a>  
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+
+    <!-- jquery -->
+    <script src="../biblioteca/jquery/jquery.min.js"></script>
+    <script src="../biblioteca/popper/popper.min.js"></script>
+    <script src="../biblioteca/scrollreveal/scrollreveal.min.js"></script> 
+
+     <!-- Bootstrap core JavaScript -->
+    <script src="../biblioteca/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Biblioca de alerta -->
+    <script type="text/javascript" src="../biblioteca/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="../js/creative.js"></script>
+
+  </body>
+</html>

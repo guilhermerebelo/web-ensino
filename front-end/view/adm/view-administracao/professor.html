@@ -1,0 +1,204 @@
+<div class="row" ng-controller="ctrlProfessor">
+      
+      <div class="panel with panel-primary class">
+          <div class="panel-heading">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <h2 class="page-header">
+                        <span class="color-title-page">Professor</span>
+                      </h2>
+                  </div>
+                  <!-- /.col-lg-12 -->
+              </div>
+          </div>
+          <div class="panel-body">                        
+
+              <div class="panel panel-default">
+                    <div class="panel-heading">Cadastrar Professor</div>
+                    <div class="panel-body">
+
+                      <form name="painelAdmFormProfessor" class="form-horizontal">                                  
+                       <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Email</label>
+                          <div class="col-sm-8">
+                            <input type="email" class="form-control" name="email" placeholder="Email" ng-model="professor.email" ng-required="true">
+                            <div class="alert alert-danger" ng-show="painelAdmFormProfessor.email.$error.required && painelAdmFormProfessor.email.$dirty">
+                              <strong>Obrigatório informar um email</strong>
+                            </div>
+                            <div class="alert alert-danger" ng-show="painelAdmFormProfessor.email.$error.email && painelAdmFormProfessor.email.$dirty">
+                              <strong>Obrigatório informar um email válido</strong>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Senha</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" name="senha" placeholder="Senha" ng-model="professor.senha" ng-required="true">
+                            <div class="alert alert-danger" ng-show="painelAdmFormProfessor.senha.$error.required && painelAdmFormProfessor.senha.$dirty">
+                              <strong>Obrigatório informar uma senha</strong>
+                            </div>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Nome Completo</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" name="nome" placeholder="Nome Completo" ng-model="professor.nome" ng-required="true">
+                            <div class="alert alert-danger" ng-show="painelAdmFormProfessor.nome.$error.required && painelAdmFormProfessor.nome.$dirty">
+                              <strong>Obrigatório informar um nome</strong>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Telefone</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" mask="(99) 99999-9999" name="telefone" placeholder="Telefone" ng-model="professor.telefone" ng-required="true">
+                            <div class="alert alert-danger" ng-show="painelAdmFormProfessor.telefone.$error.required && painelAdmFormProfessor.telefone.$dirty">
+                              <strong>Obrigatório informar um telefone</strong>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Endereço</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" name="endereco" placeholder="Endereço" ng-model="professor.endereco" ng-required="true">
+                            <div class="alert alert-danger" ng-show="painelAdmFormProfessor.endereco.$error.required && painelAdmFormProfessor.endereco.$dirty">
+                              <strong>Obrigatório informar um endereço</strong>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-offset-2 col-md-8 col-md-offset-2">
+                            <button class="btn btn-success" ng-click="cadastrarProfessor(professor)" ng-disabled="painelAdmFormProfessor.$invalid">CADASTRAR</button>
+                            <button class="btn btn-warning" ng-click="limparProfessor()">LIMPAR</button>
+                        </div>
+                      </form>            
+
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">Editar/Excluir Professor</div>
+                  
+                <div class="panel-body">
+                  <form class="form-horizontal">
+                      <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Buscar</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" name="" placeholder="Buscar" ng-model="busca.professor">
+                          </div>
+                       </div>
+                   </form>
+
+                  <table class="table table-striped">
+                      <tr>
+                          <th>Código</th>
+                          <th>Nome</th>
+                          <th>Telefone</th>
+                          <th>Endereco</th>
+                          <th>Email</th>
+                          <th>Ação</th>
+                      </tr>
+                      <tr ng-repeat="var in arrayProfessor | orderBy: 'nome' | filter:busca.professor">
+                          <td>  {{var.id}} </td>
+                          <td>  {{var.nome}} </td>
+                          <td>  {{var.telefone}} </td>                                    
+                          <td>  {{var.endereco}} </td>
+                          <td>  {{var.email}} </td>
+                          <td>
+                            <i ng-click="editarProfessor(var)" data-toggle="modal" data-target="#myModalProfessor" class="fa fa-pencil" aria-hidden="true"></i>
+                            <i ng-click="excluirProfessor(var.id)" class="fa fa-trash" aria-hidden="true"></i>
+                          </td>
+                      </tr>
+                  </table>
+                   
+                </div>
+              </div>
+
+          </div>
+          <!-- /.body panel -->                    
+      </div> 
+      <!-- /.panel -->
+
+      <!-- Modal -->
+        <div class="modal fade" id="myModalProfessor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Editar Professor</h4>
+              </div>
+              <div class="modal-body">
+                
+                <form name="painelAdmFormProfessorModal" class="form-horizontal">
+                      <div class="form-group">
+                        <label class="control-label col-sm-2" for="">Código</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control" placeholder="Código" ng-model="professorModal.id" disabled>
+                        </div>
+                      </div>
+                     <div class="form-group">
+                        <label class="control-label col-sm-2" for="">Email</label>
+                        <div class="col-sm-8">
+                          <input type="email" class="form-control" name="email" placeholder="Email" ng-model="professorModal.email" ng-required="true">
+                          <div class="alert alert-danger" ng-show="painelAdmFormProfessorModal.email.$error.required && painelAdmFormProfessorModal.email.$dirty">
+                            <strong>Obrigatório informar um email</strong>
+                          </div>
+                          <div class="alert alert-danger" ng-show="painelAdmFormProfessorModal.email.$error.email && painelAdmFormProfessorModal.email.$dirty">
+                            <strong>Obrigatório informar um email válido</strong>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2" for="">Senha</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control" name="senha" placeholder="Senha" ng-model="professorModal.senha" ng-required="true">
+                          <div class="alert alert-danger" ng-show="painelAdmFormProfessorModal.senha.$error.required && painelAdmFormProfessorModal.senha.$dirty">
+                            <strong>Obrigatório informar uma senha</strong>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2" for="">Nome Completo</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control" name="nome" placeholder="Nome Completo" ng-model="professorModal.nome" ng-required="true">
+                          <div class="alert alert-danger" ng-show="painelAdmFormProfessorModal.nome.$error.required && painelAdmFormProfessorModal.nome.$dirty">
+                            <strong>Obrigatório informar um nome</strong>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2" for="">Telefone</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control" mask="(99) 99999-9999" name="telefone" placeholder="Telefone" ng-model="professorModal.telefone" ng-required="true">
+                          <div class="alert alert-danger" ng-show="painelAdmFormProfessorModal.telefone.$error.required && painelAdmFormProfessorModal.telefone.$dirty">
+                            <strong>Obrigatório informar um telefone</strong>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2" for="">Endereço</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control" name="endereco" placeholder="Endereço" ng-model="professorModal.endereco" ng-required="true">
+                          <div class="alert alert-danger" ng-show="painelAdmFormProfessorModal.endereco.$error.required && painelAdmFormProfessorModal.endereco.$dirty">
+                            <strong>Obrigatório informar um endereço</strong>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">                                 
+                        <div class="col-sm-offset-2 col-sm-8">
+                          <button data-dismiss="modal" class="btn btn-success" ng-click="salvarEdicaoProfessor(professorModal)" ng-disabled="painelAdmFormProfessorModal.$invalid">EDITAR CADASTRO</button>
+                        </div>
+                      </div>
+                    
+                    </form>                       
+
+              </div>
+              <div class="modal-footer">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+  <!-- /.row -->

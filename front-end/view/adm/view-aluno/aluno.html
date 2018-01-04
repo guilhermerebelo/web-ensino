@@ -1,0 +1,98 @@
+<div class="row" ng-controller="ctrlAluno">
+        <div class="panel with panel-primary class">                            
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="page-header">
+                          <span class="color-title-page">Editar Dados Pessoais</span>
+                        </h2>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+            </div>
+            <div class="panel-body">  
+
+                <div class="panel panel-default">
+                      <div class="panel-heading">Editar Cadastro</div>
+                      <div class="panel-body">
+
+                        <form name="painelAlunoDadosForm" class="form-horizontal">
+                          <div class="form-group">
+                            <label class="control-label col-sm-2" >Código</label>
+                            <div class="col-sm-8">
+                              <input type="text" class="form-control" placeholder="Código" ng-model="painelAluno.id" disabled>
+                            </div>
+                         </div>
+                         
+                          <div class="form-group">
+                            <label class="control-label col-sm-2" for="">Email</label>
+                            <div class="col-sm-8">
+                              <input type="email" class="form-control" name="email" placeholder="Email" ng-model="painelAluno.email" ng-required="true">
+                              <div class="alert alert-danger" ng-show="painelAlunoDadosForm.email.$error.required && painelAlunoDadosForm.email.$dirty">
+                                <strong>Obrigatório o email</strong>
+                              </div>
+                              <div class="alert alert-danger" ng-show="painelAlunoDadosForm.email.$error.email && painelAlunoDadosForm.email.$dirty">
+                                <strong>Obrigatório informar um email válido</strong>
+                              </div>
+                            </div>
+                          </div>
+                         
+                          <hr>
+                          <div class="form-group">
+                            <label class="control-label col-sm-2" for="">Nome Completo</label>
+                            <div class="col-sm-8">
+                              <input type="text" class="form-control" name="nome" placeholder="Nome Completo" ng-model="painelAluno.nome" ng-required="true">
+                              <div class="alert alert-danger" ng-show="painelAlunoDadosForm.nome.$error.required && painelAlunoDadosForm.nome.$dirty">
+                                <strong>Obrigatório um nome</strong>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-sm-2" for="">Telefone</label>
+                            <div class="col-sm-8">
+                              <input type="text" class="form-control mascara-telefone" mask="(99) 99999-9999" name="telefone" placeholder="Telefone" ng-model="painelAluno.telefone" ng-required="true">
+                              <div class="alert alert-danger" ng-show="painelAlunoDadosForm.telefone.$error.required && painelAlunoDadosForm.telefone.$dirty">
+                                <strong>Obrigatório um telefone</strong>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-sm-2" for="">Endereço</label>
+                            <div class="col-sm-8">
+                              <input type="text" class="form-control" name="endereco" placeholder="Endereço" ng-model="painelAluno.endereco" ng-required="true">
+                              <div class="alert alert-danger" ng-show="painelAlunoDadosForm.endereco.$error.required && painelAlunoDadosForm.endereco.$dirty">
+                                <strong>Obrigatório um endereço</strong>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div class="col-md-offset-2 col-md-8 col-md-offset-2">
+                              <button class="btn btn-success" ng-click="editarPainelAluno(painelAluno)" ng-disabled="painelAlunoDadosForm.$invalid">SALVAR ALTERAÇÃO</button>
+                              <button class="btn btn-primary" ng-disabled="btnEditarUltimoAluno" ng-click="restaurarAluno()">DESFAZER</button>
+                          </div>
+                          
+                        </form>            
+
+                  </div>
+                </div>
+
+            
+            </div>
+            <!-- /.body panel -->                    
+        </div> 
+        <!-- /.panel -->
+
+
+         <!-- Modal -->
+        <div class="modal fade posicao-modal-alerta" id="cadastroConteudoPainelAluno" tabindex="50" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="alert alert-success text-center padding-30">
+              <strong id="cadastroConteudoPainelAluno-txt" class="font-size-25"><i class="fa fa-check" aria-hidden="true"></i></strong>
+            </div>
+          </div>
+        </div>
+         <!-- Modal -->
+
+      
+    </div>
+    <!-- /.row -->

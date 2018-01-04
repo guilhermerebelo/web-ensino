@@ -1,0 +1,168 @@
+<div class="row" > <!-- ng-controller="ctrlProfessor"-->
+      <div class="panel with panel-primary class">
+          <div class="panel-heading">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <h2 class="page-header">
+                        <span class="color-title-page">Conteúdo e Lista de Alunos</span>
+                      </h2>
+                  </div>
+                  <!-- /.col-lg-12 -->
+              </div>
+          </div>
+          <div class="panel-body">      
+              <div class="panel panel-default" ng-controller="ctrlCurso">
+                    <div class="panel-heading text-uppercase">Cadastrar Conteúdo do curso de {{dadosCursoLogado.nome}}</div>
+                    <div class="panel-body">
+
+                      <form name="painelProfessorFormConteudo" class="form-horizontal">                                  
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Conteúdo do Curso</label>
+                          <div class="col-sm-8">
+                            <textarea class="form-control" name="conteudo" placeholder="Conteúdo" ng-model="professorCadastraConteudo" ng-required="true"></textarea>
+                            <div class="alert alert-danger" ng-show="painelProfessorFormConteudo.conteudo.$error.required && painelProfessorFormConteudo.conteudo.$dirty">
+                              <strong>Obrigatório informar algum conteúdo</strong>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-offset-2 col-md-8 col-md-offset-2">
+                            <button class="btn btn-success" ng-click="cadastrarConteudoNoBanco(professorCadastraConteudo)" ng-disabled="painelProfessorFormConteudo.$invalid">CADASTRAR</button>
+                            <button class="btn btn-primary" ng-click="limparConteudoCadastro()">LIMPAR</button>
+                        </div>
+                      </form> 
+
+                    <div class="modal fade posicao-modal-alerta" id="cadastroConteudoPainelProfessor" tabindex="50" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="alert alert-success text-center padding-30">
+                          <strong id="cadastroConteudoPainelProfessor-txt" class="font-size-25"><i class="fa fa-check" aria-hidden="true"></i></strong>
+                        </div>
+                      </div>
+                    </div>    
+
+              </div>
+              </div>
+
+
+              <div class="panel panel-default" ng-controller="ctrlAluno">
+                <div class="panel-heading">Editar/Excluir Avaliação</div>
+                <div class="panel-body">
+
+                  <form class="form-horizontal">
+                      <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Buscar</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" name="" placeholder="Buscar" ng-model="busca.aluno">
+                          </div>
+                       </div>
+                   </form>
+                  <table class="table table-striped">
+                      <h2 class="text-center">Alunos do curso</h2>
+                      <tr>
+                          <th>Nome Aluno</th>
+                          <th>Nota 1</th>
+                          <th>Nota 2</th>
+                          <th>Nota 3</th>
+                          <th>Nota 4</th>
+                          <th class=" text-center">Ação</th>
+                      </tr>
+                      <tr ng-repeat="var in arrayAlunosCursoProfessorLogado |orderBy: 'nome' | filter: busca.aluno">
+                          <td> {{var.nome}} </td>
+                          <td> {{var.nota1}} </td>
+                          <td> {{var.nota2}} </td>
+                          <td> {{var.nota3}} </td>
+                          <td> {{var.nota4}} </td>
+                          <td class=" text-center"> 
+                            <i ng-click="adicionarNotaAlunos(var)" data-toggle="modal" data-target="#myModalProfessor" class="fa fa-pencil" aria-hidden="true"></i>
+                          </td>
+                      </tr>
+                  </table>
+                </div>
+
+
+                <div class="modal fade" id="myModalProfessor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Adicionar Nota ao Aluno {{notaAluno.nome}} </h4>
+                      </div>
+                      <div class="modal-body">
+
+                        <form name="painelProfessorFormNotasAlunos" class="form-horizontal"> 
+                          <div class="form-group">
+                            <label class="control-label col-sm-2" for="">Nome do Aluno</label>
+                            <div class="col-sm-8">
+                              <input type="text" class="form-control" placeholder="Nome do Aluno" ng-model="notaAluno.nome" disabled>
+                            </div>
+                          </div>
+                          <hr> 
+                         <div class="form-group">
+                            <label class="control-label col-sm-2" for="">Nota 1</label>
+                            <div class="col-sm-8">
+                              <input type="number" class="form-control" name="nota1" placeholder="Nota 1" ng-model="notaAluno.nota1" ng-required="false" maxlength="3">
+                              <div class="alert alert-danger" ng-show="painelProfessorFormNotasAlunos.nota1.$error.required && painelProfessorFormNotasAlunos.nota1.$dirty">
+                              <strong>Obrigatório informar a primeia nota</strong>
+                            </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-sm-2" for="">Nota 2</label>
+                            <div class="col-sm-8">
+                              <input type="number" class="form-control" name="nota2" placeholder="Nota 2" ng-model="notaAluno.nota2" ng-required="false" maxlength="3">
+                              <div class="alert alert-danger" ng-show="painelProfessorFormNotasAlunos.nota2.$error.required && painelProfessorFormNotasAlunos.nota2.$dirty">
+                              <strong>Obrigatório informar a segunda nota</strong>
+                            </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-sm-2" for="">Nota 3</label>
+                            <div class="col-sm-8">
+                              <input type="number" class="form-control" name="nota3" placeholder="Nota 3" ng-model="notaAluno.nota3" ng-required="false" maxlength="3">
+                              <div class="alert alert-danger" ng-show="painelProfessorFormNotasAlunos.nota3.$error.required && painelProfessorFormNotasAlunos.nota3.$dirty">
+                              <strong>Obrigatório informar a terceira nota</strong>
+                            </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-sm-2" for="">Nota 4</label>
+                            <div class="col-sm-8">
+                              <input type="number" class="form-control" name="nota4" placeholder="Nota 4" ng-model="notaAluno.nota4" ng-required="false" maxlength="3">
+                              <div class="alert alert-danger" ng-show="painelProfessorFormNotasAlunos.nota4.$error.required && painelProfessorFormNotasAlunos.nota4.$dirty">
+                              <strong>Obrigatório informar a quarta nota</strong>
+                            </div>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">
+                            <label class="control-label col-sm-2" for=""></label>
+                            <div class="col-sm-8">
+                              <button data-dismiss="modal" class="btn btn-success" ng-click="salvarNotas(notaAluno)" ng-disabled="painelProfessorFormNotasAlunos.$invalid">SALVAR NOTAS</button>
+                            </div>
+                          </div>
+                        </form>  
+
+                      </div>
+                      <div class="modal-footer">
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade posicao-modal-alerta" id="cadastroNotasPainelProfessor" tabindex="50" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="alert alert-success text-center padding-30">
+                      <strong id="cadastroNotasPainelProfessor-txt" class="font-size-25"><i class="fa fa-check" aria-hidden="true"></i></strong>
+                    </div>
+                  </div>
+                </div>
+                 <!-- Modal -->
+
+              </div>
+          </div>
+          <!-- /.body panel -->                    
+      </div> 
+      <!-- /.panel -->
+  </div>
+  <!-- /.row -->

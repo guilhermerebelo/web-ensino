@@ -1,0 +1,66 @@
+<div class="row"  ng-controller="ctrlPainelAdm">
+                <div class="panel with panel-primary class">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h2 class="page-header">
+                                  <span class="color-title-page">Conta</span>
+                                </h2>
+                            </div>
+                            <!-- /.col-lg-12 -->
+                        </div>
+                    </div>
+                    <div class="panel-body">              
+
+                        <div class="panel panel-default">
+                       
+                            <div class="panel-heading">Administrador</div>
+                            <div class="panel-body">
+
+                                <form name="painelAdmFormSenha" class="form-horizontal">
+                                  <div class="form-group">
+                                    <label class="control-label col-sm-2" for="">Senha Atual</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" class="form-control" name="senhaAtual" placeholder="Senha Atual" ng-model="senha.senhaAtual" ng-required="true">
+                                      <div class="alert alert-danger" ng-show="painelAdmFormSenha.senhaAtual.$error.required && painelAdmFormSenha.senhaAtual.$dirty">
+                                        <strong>Obrigatório informa senha atual</strong>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <hr>
+                                 <div class="form-group">
+                                    <label class="control-label col-sm-2" for="">Nova Senha</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" class="form-control" name="novaSenha" placeholder="Nova Senha" ng-model="senha.novaSenha" ng-required="true">
+                                      <div class="alert alert-danger" ng-show="painelAdmFormSenha.novaSenha.$error.required && painelAdmFormSenha.novaSenha.$dirty">
+                                        <strong>Obrigatório informar nova senha</strong>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="control-label col-sm-2" for="">Confirme Nova Senha</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" class="form-control" name="confirmaNovaSenha" placeholder="Confirme Nova Senha" ng-model="senha.confirmaNovaSenha" ng-required="true">
+                                      <div class="alert alert-danger" ng-show="painelAdmFormSenha.confirmaNovaSenha.$error.required && painelAdmFormSenha.confirmaNovaSenha.$dirty">
+                                        <strong>Obrigatório confirmar nova senha</strong>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="col-md-offset-2 col-md-8 col-md-offset-2">
+                                      <button class="btn btn-success" ng-click="trocarSenha(senha)" ng-disabled="painelAdmFormSenha.$invalid">CADASTRAR NOVA SENHA</button>
+                                  </div>
+                                  
+                                </form>            
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.body panel -->                    
+                </div> 
+                <!-- /.panel -->
+
+
+            </div>
+            <!-- /.row -->

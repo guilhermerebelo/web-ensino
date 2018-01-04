@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="app">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    <title>Projeto Bairro da Juventude</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../biblioteca/bootstrap/css/bootstrap.3.3.7.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../../biblioteca/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link href="../../biblioteca/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../biblioteca/sb-admin/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Angular JavaScript -->
+    <script type="text/javascript" src="../../biblioteca/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../biblioteca/angular/angular-route.min.js"></script>
+    <script type="text/javascript" src="../../biblioteca/angular/ngMask.min.js"></script>
+    
+    <!-- Angular JavaScript - app -->
+    <script type="text/javascript" src="../../angular/app.js"></script>
+
+    <!-- Angular JavaScript - controller -->
+    <script type="text/javascript" src="../../angular/controller/ctrlProfessor.js"></script>
+    <script type="text/javascript" src="../../angular/controller/ctrlAluno.js"></script>
+    <script type="text/javascript" src="../../angular/controller/ctrlCurso.js"></script>
+    <script type="text/javascript" src="../../angular/controller/painel/ctrlPainelAdm.js"></script>
+
+    <!-- Angular JavaScript - config -->
+    <script type="text/javascript" src="../../angular/config/administradorRoute.js"></script>
+
+    <!-- Angular JavaScript - service -->
+    <script type="text/javascript" src="../../angular/service/professorAPI.js"></script>
+    <script type="text/javascript" src="../../angular/service/alunoAPI.js"></script>
+    <script type="text/javascript" src="../../angular/service/admAPI.js"></script>
+    <script type="text/javascript" src="../../angular/service/cursoAPI.js"></script>
+    <script type="text/javascript" src="../../angular/service/statusAPI.js"></script>   
+
+</head>
+<body>
+
+   
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top margin-bottom-0px" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">
+                  <img class="posicao-logo-adm" src="../../img/logo-horizontal.png">
+                </a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">             
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase">
+                      <h4 class="color-laranja-theme"> administrador <i class="fa fa-user-circle-o" aria-hidden="true"></i> </h4>
+                    </a>
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div  class="navbar-default sidebar" role="navigation" ng-controller="ctrlPainelAdm">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="#!/professor"><i class="fa fa-user fa-fw"></i> Professor</a> 
+                        </li>
+                        <li>
+                            <a href="#!/curso"><i class="fa fa-graduation-cap"></i> Curso</a> 
+                        </li>
+                        <li>
+                            <a href="#!/aluno"><i class="fa fa-user-o"></i> Aluno</a>    
+                        </li>       
+                        <li>
+                            <a ><i class="fa fa-cog"></i> Conta <span class="fa arrow"></span></a>                            
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#!/senha">Editar Senha</a>
+                                </li>
+                                <li>
+                                    <a ng-click="sair()">Sair</a>
+                                </li>
+                            </ul>
+                        </li>                 
+                        
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper" ng-view></div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+   
+
+    <!-- Jquery -->
+    <script src="../../biblioteca/jquery/jquery.min.js"></script>
+
+    <!-- Biblioca de alerta -->
+    <script type="text/javascript" src="../../biblioteca/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../../biblioteca/bootstrap/js/bootstrap.3.3.7.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../../biblioteca/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../../biblioteca/sb-admin/sb-admin-2.js"></script>
+
+  </body>
+</html>

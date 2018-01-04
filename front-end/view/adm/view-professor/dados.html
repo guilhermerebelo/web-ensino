@@ -1,0 +1,94 @@
+<div class="row" ng-controller="ctrlProfessor">
+      <div class="panel with panel-primary class">
+          <div class="panel-heading">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <h2 class="page-header">
+                        <span class="color-title-page">Editar Dados Pessoais</span>
+                      </h2>
+                  </div>
+                  <!-- /.col-lg-12 -->
+              </div>
+          </div>
+          <div class="panel-body">     
+
+              <div class="panel panel-default">
+                    <div class="panel-heading">Cadastrar Conteúdo do curso</div>
+                    <div class="panel-body">
+
+                      <form name="painelProfessorFormDados" class="form-horizontal"> 
+
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Código</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" placeholder="Código" ng-model="painelProfessor.id" disabled>
+                          </div>
+                        </div>   
+
+                       <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Email</label>
+                          <div class="col-sm-8">
+                            <input type="email" class="form-control" name="email" placeholder="Email" ng-model="painelProfessor.email" ng-required="true">
+                            <div class="alert alert-danger" ng-show="painelProfessorFormDados.email.$error.required && painelProfessorFormDados.email.$dirty">
+                              <strong>Obrigatório informar o email</strong>
+                            </div>
+                            <div class="alert alert-danger" ng-show="painelProfessorFormDados.email.$error.email && painelProfessorFormDados.email.$dirty">
+                              <strong>Obrigatório informar um email válido</strong>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <hr>
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Nome Completo</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" name="nome" placeholder="Nome Completo" ng-model="painelProfessor.nome" ng-required="true">
+                            <div class="alert alert-danger" ng-show="painelProfessorFormDados.nome.$error.required && painelProfessorFormDados.nome.$dirty">
+                              <strong>Obrigatório informar o nome</strong>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Telefone</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" name="telefone" mask="(99) 99999-9999" placeholder="Telefone" ng-model="painelProfessor.telefone" ng-required="true">
+                            <div class="alert alert-danger" ng-show="painelProfessorFormDados.telefone.$error.required && painelProfessorFormDados.telefone.$dirty">
+                              <strong>Obrigatório informar o telefone</strong>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Endereço</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" name="endereco" placeholder="Endereço" ng-model="painelProfessor.endereco" ng-required="true">
+                            <div class="alert alert-danger" ng-show="painelProfessorFormDados.endereco.$error.required && painelProfessorFormDados.endereco.$dirty">
+                              <strong>Obrigatório informar o endereço</strong>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-offset-2 col-md-8 col-md-offset-2">
+                            <button class="btn btn-success" ng-click="editarPainelProfessor(painelProfessor)" ng-disabled="painelProfessorFormDados.$invalid">SALVAR ALTERAÇÃO</button>
+                            <button class="btn btn-primary" ng-disabled="btnEditarUltimoAluno" ng-click="restaurarProfessor()">DESFAZER</button>
+                        </div>
+                      </form>   
+
+                </div>
+              </div>
+
+          </div>
+          <!-- /.body panel -->                    
+      </div> 
+      <!-- /.panel -->
+
+      <!-- Modal -->
+      <div class="modal fade posicao-modal-alerta" id="editarDadosPainelProfessor" tabindex="50" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="alert alert-success text-center padding-30">
+            <strong id="editarDadosPainelProfessor-txt" class="font-size-25"><i class="fa fa-check" aria-hidden="true"></i></strong>
+          </div>
+        </div>
+      </div>
+       <!-- Modal -->
+
+  </div>
+  <!-- /.row -->

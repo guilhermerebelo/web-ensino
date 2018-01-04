@@ -1,0 +1,233 @@
+<div class="row" ng-controller="ctrlAluno">
+      <div class="panel with panel-primary class">                            
+          <div class="panel-heading">
+                
+              <div class="row">
+                  <div class="col-lg-12">
+                      <h2 class="page-header">
+                        <span class="color-title-page">Aluno</span>
+                      </h2>
+                  </div>
+                  <!-- /.col-lg-12 -->
+              </div>
+          </div>
+          <div class="panel-body">  
+
+              <div class="panel panel-default">
+                    <div class="panel-heading">Cadastrar Aluno</div>
+                    <div class="panel-body">
+
+                      <form name="painelAdmFormAluno" class="form-horizontal">
+                       
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Email</label>
+                          <div class="col-sm-8">
+                            <input type="email" class="form-control" name="email" placeholder="Email" ng-model="aluno.email" ng-required="true">
+                             <div class="alert alert-danger" ng-show="painelAdmFormAluno.email.$error.required && painelAdmFormAluno.email.$dirty">
+                              <strong>Obrigatório informar o email</strong>
+                            </div>
+                            <div class="alert alert-danger" ng-show="painelAdmFormAluno.email.$error.email && painelAdmFormAluno.email.$dirty">
+                              <strong>Obrigatório informar um email válido</strong>
+                            </div>
+                          </div>
+                        </div>
+                       
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Senha</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" name="senha" placeholder="Senha" ng-model="aluno.senha" ng-required="true">
+                             <div class="alert alert-danger" ng-show="painelAdmFormAluno.senha.$error.required && painelAdmFormAluno.senha.$dirty">
+                              <strong>Obrigatório informar a senha</strong>
+                            </div>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Nome Completo</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" name="nome" placeholder="Nome Completo" ng-model="aluno.nome" ng-required="true">
+                             <div class="alert alert-danger" ng-show="painelAdmFormAluno.nome.$error.required && painelAdmFormAluno.nome.$dirty">
+                              <strong>Obrigatório informar o nome do aluno</strong>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Telefone</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" mask="(99) 99999-9999" name="telefone" placeholder="Telefone" ng-model="aluno.telefone" ng-required="true">
+                             <div class="alert alert-danger" ng-show="painelAdmFormAluno.telefone.$error.required && painelAdmFormAluno.telefone.$dirty">
+                              <strong>Obrigatório informar o telefone</strong>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Endereço</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" name="endereco" placeholder="Endereço" ng-model="aluno.endereco" ng-required="true">
+                             <div class="alert alert-danger" ng-show="painelAdmFormAluno.endereco.$error.required && painelAdmFormAluno.endereco.$dirty">
+                              <strong>Obrigatório informar o endereço</strong>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Curso</label>
+                          <div class="col-sm-8">
+                            <select class="form-control" name="curso" ng-options="var.nome for var in arrayCurso" ng-model="aluno.curso" ng-required="true">
+                                <option value="">Selecione um Curso</option>                                         
+                            </select>
+                             <div class="alert alert-danger" ng-show="painelAdmFormAluno.curso.$error.required && painelAdmFormAluno.curso.$dirty">
+                              <strong>Obrigatório selecionar um curso</strong>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="col-md-offset-2 col-md-8 col-md-offset-2">
+                            <button class="btn btn-success" ng-click="cadastrarAluno(aluno)" ng-disabled="painelAdmFormAluno.$invalid">CADASTRAR</button>
+                            <button class="btn btn-warning" ng-click="limparAluno()">LIMPAR</button>
+                            <button class="btn btn-primary" ng-disabled="btnEditarUltimoAluno" ng-click="editarUltimoAluno()">EDITAR ULTIMO</button>
+                        </div>
+                        
+                      </form>            
+
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">Editar/Excluir Aluno</div>
+                <div class="panel-body">
+                  <form class="form-horizontal">
+                      <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Buscar</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" name="" placeholder="Buscar" ng-model="busca.aluno">
+                          </div>
+                       </div>
+                   </form>
+                  <table class="table table-striped">
+                      <tr>
+                          <th>Código</th>
+                          <th>Nome</th>
+                          <th>Telefone</th>
+                          <th>Endereco</th>
+                          <th>Email</th>
+                          <th>Curso</th>
+                          <th>Ação</th>
+                      </tr>
+                      <tr ng-repeat="var in arrayAluno | orderBy: 'nome' | filter:busca.aluno">
+                          <td> {{var.id}} </td>
+                          <td> {{var.nome}} </td>
+                          <td> {{var.telefone}} </td>
+                          <td> {{var.endereco}} </td>
+                          <td> {{var.email}} </td>
+                          <td> {{var.curso}} </td>
+                          <td>
+                            <i ng-click="editarAluno(var)" data-toggle="modal" data-target="#myModalAluno" class="fa fa-pencil" aria-hidden="true"></i>
+                            <i ng-click=excluirAluno(var.id)  class="fa fa-trash" aria-hidden="true"></i>
+                          </td>
+                      </tr>
+                  </table>
+                   
+                </div>
+              </div>
+
+          
+          </div>
+          <!-- /.body panel -->                    
+      </div> 
+      <!-- /.panel -->
+
+
+       <!-- /.MODAL -->
+      <div class="modal fade" id="myModalAluno" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">EditarAluno</h4>
+              </div>
+              <div class="modal-body">
+                
+                 <form name="painelAdmFormAlunoModel" class="form-horizontal">
+
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Código</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" placeholder="Código" ng-model="alunoModal.id" disabled>
+                          </div>
+                        </div>
+
+                        <hr>
+                                                        
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Email</label>
+                          <div class="col-sm-8">
+                            <input type="email" class="form-control" name="email" placeholder="Email" ng-model="alunoModal.email" ng-required="true">
+                            <div class="alert alert-danger" ng-show="painelAdmFormAlunoModel.email.$error.required && painelAdmFormAlunoModel.email.$dirty">
+                              <strong>Obrigatório informar o email</strong>
+                            </div>
+                            <div class="alert alert-danger" ng-show="painelAdmFormAlunoModel.email.$error.email && painelAdmFormAlunoModel.email.$dirty">
+                              <strong>Obrigatório informar um email válido</strong>
+                            </div>
+                          </div>
+                        </div>
+                      
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Nome Completo</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" name="nome" placeholder="Nome Completo" ng-model="alunoModal.nome" ng-required="true">
+                            <div class="alert alert-danger" ng-show="painelAdmFormAlunoModel.nome.$error.required && painelAdmFormAlunoModel.nome.$dirty">
+                              <strong>Obrigatório informar o nome</strong>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Telefone</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" mask="(99) 99999-9999" name="telefone" placeholder="Telefone" ng-model="alunoModal.telefone" ng-required="true">
+                            <div class="alert alert-danger" ng-show="painelAdmFormAlunoModel.telefone.$error.required && painelAdmFormAlunoModel.telefone.$dirty">
+                              <strong>Obrigatório informar o telefone</strong>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Endereço</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" name="endereco" placeholder="Endereço" ng-model="alunoModal.endereco" ng-required="true">
+                            <div class="alert alert-danger" ng-show="painelAdmFormAlunoModel.endereco.$error.required && painelAdmFormAlunoModel.endereco.$dirty">
+                              <strong>Obrigatório informar o endereço</strong>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="">Curso</label>
+                          <div class="col-sm-8">
+                            <select class="form-control" name="curso" ng-options="var.nome for var in arrayCurso" ng-model="alunoModal.curso" ng-required="true">
+                                <option value="">Selecione um Curso</option>
+                            </select>
+                            <div class="alert alert-danger" ng-show="painelAdmFormAlunoModel.curso.$error.required && painelAdmFormAlunoModel.curso.$dirty">
+                              <strong>Obrigatório selecionar um curso</strong>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">                                 
+                          <div class="col-sm-offset-2 col-sm-8">
+                            <button data-dismiss="modal" class="btn btn-success" ng-click="salvarEdicaoAluno(alunoModal)" ng-disabled="painelAdmFormAlunoModel.$invalid">EDITAR CADASTRO</button>
+                          </div>
+                        </div>
+                        
+                  </form>                       
+
+              </div>
+              <div class="modal-footer">
+                  
+              </div>
+            </div>
+          </div>
+      </div>
+
+      
+  </div>
+  <!-- /.row -->

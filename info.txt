@@ -1,0 +1,12 @@
+INFORMAÇÕES GERAIS
+------------------
+
+servidor: wildfly 9x
+banco de dados: ensino
+
+
+tabela admin necessita dos seguintes dados
+id: 1 | usuário: admin* | senha: admin*
+
+
+* pode ser qualquer usuário e senha

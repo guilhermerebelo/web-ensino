@@ -1,0 +1,91 @@
+/*
+Nome: Guilherme Rebelo
+Data: 28/08
+fone: 48 9 9806 0375;
+*/
+
+
+@font-face {
+     font-family: Quicksand;
+     src: url('font/Quicksand-Regular.ttf');
+}
+
+*{
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+	font-family: 'Quicksand';
+}
+#nomePrincipal{
+	font-size: 35px;	
+}
+.espacoLetras{
+	letter-spacing: 2px;
+}
+.centralizar{
+	text-align: center;
+	margin: 5px 0px 0px 0px;
+}
+.paragrafo{
+	text-indent: 1.5em;
+}
+.alinhar{
+	text-align: justify;
+}
+section{
+	width: 820px;
+	margin: 10px auto;
+	border-top: 8px solid gray;
+	background-color: #F5F5F5;
+	padding: 10px 0px 10px 0px; 
+}
+#info{
+	margin-top: 15px;
+}
+.categoria{
+	border-bottom: 1px solid gray;
+	width: 90%;
+	padding: 30px 0px 30px 0px;
+	margin: auto;
+	display: flex;	
+}
+.nomeCategoria{
+	width: 30%;
+	float: left;
+	font-size: 25px;
+	font-style: italic;
+}
+.conteudo{
+	width: 70%;
+	float: right;
+}
+.secaoConteudo{
+	margin-bottom: 18px;
+	border-bottom: 1px solid #cccccc;
+	padding-bottom: 5px;
+}
+.secaoConteudo .espacoCurso{
+	margin-bottom: 10px;
+}
+.categoria .titulo{
+	font-size: 20px;	
+}
+.titulo .ano{
+	float: right;
+	font-weight: normal;
+}
+.categoria .subTitulo{	
+	font-size: 17px;
+}
+.categoria .subConteudo{
+	font-size: 15px;
+	margin-top: 3px;
+}
+.skills{
+	display: inline-flex;
+	width: 100%;
+}
+.skills div{
+	width: 33%;
+	margin-right: 2px;
+}
